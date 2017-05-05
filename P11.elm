@@ -13,24 +13,23 @@ type RleCode a
 
 rleEncode : List a -> List (RleCode a)
 rleEncode list =
-    List.concat <|
-        List.map
-            (\elem ->
-                case List.head elem of
-                    Just val ->
-                        let
-                            len =
-                                List.length elem
-                        in
-                            if len > 1 then
-                                [ Run len val ]
-                            else
-                                [ Single val ]
+    List.concatMap
+        (\elem ->
+            case List.head elem of
+                Just val ->
+                    let
+                        len =
+                            List.length elem
+                    in
+                        if len > 1 then
+                            [ Run len val ]
+                        else
+                            [ Single val ]
 
-                    _ ->
-                        []
-            )
-            (P09.pack list)
+                _ ->
+                    []
+        )
+        (P09.pack list)
 
 
 main : Html.Html a
