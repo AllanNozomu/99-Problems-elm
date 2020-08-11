@@ -1,4 +1,4 @@
 # 99-Problems-elm
-Ninety-nine Problems, Solved in Elm from https://www.gitbook.com/book/johncrane/ninety-nine-elm-problems/details
+Ninety-nine Problems, Solved in Elm (Version 0.19). Based on the [Haskell one](https://wiki.haskell.org/H-99:_Ninety-Nine_Haskell_Problems).
 
-this problems are deprecated because the book and the solutions was written for Elm 0.17
+I am updating and trying to solve then all. Also, adding some tests to it.
