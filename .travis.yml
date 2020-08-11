@@ -1,0 +1,12 @@
+language: elm
+node_js: '11'
+
+
+elm:
+  - "latest-0.19.1"
+
+install: ":"
+
+script:
+  - elm-format --validate src/
+  - elm-test
