@@ -15,7 +15,7 @@ suite =
                 Expect.equal (solve []) []
         , test "One element" <|
             \_ ->
-                Expect.equal (solve [ 1 ]) [1]
+                Expect.equal (solve [ 1 ]) [ 1 ]
         , fuzz (list int) "Random list" <|
             \randomList ->
                 Expect.equal (solve randomList) (List.reverse randomList)

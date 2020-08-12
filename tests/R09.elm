@@ -17,7 +17,7 @@ suite =
                 Expect.equal (solve [ 1 ]) [ [ 1 ] ]
         , test "Equal elements" <|
             \_ ->
-                Expect.equal (solve [ 1, 1, 1, 1, 1 ]) [ [1, 1, 1, 1, 1 ] ]
+                Expect.equal (solve [ 1, 1, 1, 1, 1 ]) [ [ 1, 1, 1, 1, 1 ] ]
         , test "Many Single elements" <|
             \_ ->
                 Expect.equal (solve [ 1, 2, 3, 4, 5 ]) [ [ 1 ], [ 2 ], [ 3 ], [ 4 ], [ 5 ] ]

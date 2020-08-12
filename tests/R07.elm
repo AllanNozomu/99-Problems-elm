@@ -2,7 +2,7 @@ module R07 exposing (suite)
 
 import Expect
 import Fuzz exposing (int, list, string)
-import P07 exposing (solve, NestedList(..))
+import P07 exposing (NestedList(..), solve)
 import Test exposing (Test, describe, fuzz, test)
 
 
@@ -34,7 +34,7 @@ suite =
             \_ ->
                 let
                     a =
-                        SubList [ Elem 1, Elem 2, SubList [ SubList [ Elem 3, SubList [ Elem 4 ], Elem 5, SubList [SubList [], Elem 6, SubList [ Elem 7 ] ] ] ] ]
+                        SubList [ Elem 1, Elem 2, SubList [ SubList [ Elem 3, SubList [ Elem 4 ], Elem 5, SubList [ SubList [], Elem 6, SubList [ Elem 7 ] ] ] ] ]
                 in
                 Expect.equal (solve a) [ 1, 2, 3, 4, 5, 6, 7 ]
         ]

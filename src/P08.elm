@@ -10,12 +10,16 @@ solve list =
         x :: r ->
             x :: solveAux r x
 
+
 solveAux : List a -> a -> List a
 solveAux list previous =
     case list of
-        [] -> []
+        [] ->
+            []
+
         x :: r ->
             if x == previous then
                 solveAux r x
+
             else
                 x :: solveAux r x
