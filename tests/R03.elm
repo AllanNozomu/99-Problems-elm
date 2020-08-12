@@ -1,4 +1,4 @@
-module R02 exposing (suite)
+module R03 exposing (suite)
 
 import Expect
 import Fuzz exposing (int, list, string)

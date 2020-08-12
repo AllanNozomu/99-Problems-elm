@@ -1,4 +1,4 @@
-module R02 exposing (suite)
+module R04 exposing (suite)
 
 import Expect
 import Fuzz exposing (int, list, string)
@@ -16,7 +16,7 @@ suite =
         , test "One element" <|
             \_ ->
                 Expect.equal (solve [ 1 ]) 1
-        , fuzzy (list int) "Random list" <|
+        , fuzz (list int) "Random list" <|
             \randomList ->
                 Expect.equal (solve randomList) (List.length randomList)
         ]

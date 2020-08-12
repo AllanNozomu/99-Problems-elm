@@ -1,7 +1,5 @@
 module P03 exposing (solve)
 
-import Html exposing (a)
-
 
 solve : List a -> Int -> Maybe a
 solve list k =
@@ -19,9 +17,6 @@ solveAux list k =
             Just a
 
         ( [], _ ) ->
-            Nothing
-
-        _ :: 1 ->
             Nothing
 
         ( _ :: r, n ) ->
