@@ -8,7 +8,7 @@ import Test exposing (Test, describe, fuzz, test)
 
 suite : Test
 suite =
-    describe "P02"
+    describe "P03"
         [ test "Empty list" <|
             \_ ->
                 Expect.equal (solve [] 1) Nothing
