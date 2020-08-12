@@ -17,7 +17,7 @@ suite =
             \_ ->
                 Expect.equal (solve [1]) (Just 1)
 
-        , fuzz string "Many elements" <|
+        , test "Many elements" <|
             \_ ->
                 Expect.equal (solve [1,2,3,4,5,9]) (Just 9)
         ]
