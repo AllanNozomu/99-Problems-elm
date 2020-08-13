@@ -1,7 +1,5 @@
 module P12 exposing (Element(..), solve)
 
-import Html exposing (a)
-
 
 type Element a
     = Single a
