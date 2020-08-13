@@ -11,7 +11,11 @@ solve list n =
             []
 
         _ ->
-            solveAux list n n
+            if n < 0 then
+                []
+
+            else
+                solveAux list n n
 
 
 solveAux : List a -> Int -> Int -> List a
