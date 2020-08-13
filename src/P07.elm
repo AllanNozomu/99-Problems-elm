@@ -1,7 +1,5 @@
 module P07 exposing (NestedList(..), solve)
 
-import Html exposing (a)
-
 
 type NestedList a
     = Elem a
