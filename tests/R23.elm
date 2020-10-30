@@ -1,11 +1,11 @@
 module R23 exposing (suite)
 
-import P23 exposing (solve)
 import Array
+import Bitwise exposing (and)
 import Expect
 import Fuzz exposing (array, bool, float, floatRange, int, intRange, list, percentage, string, tuple, tuple3)
+import P23 exposing (solve)
 import Test exposing (Test, describe, fuzz, test)
-import Bitwise exposing (and)
 
 
 suite : Test
@@ -16,7 +16,7 @@ suite =
                 Expect.equal (solve [] 1) []
         , test "Zero elements" <|
             \_ ->
-                Expect.equal (solve [1,2,3] 0) []
+                Expect.equal (solve [ 1, 2, 3 ] 0) []
         , fuzz (list int) "Given number equal" <|
             \l ->
                 Expect.equal (solve l (List.length l)) l
@@ -26,11 +26,13 @@ suite =
         , fuzz (tuple ( list int, intRange 0 100 )) "Random List" <|
             \( l, n ) ->
                 let
-                    res = solve l n
-                    isMember a = 
+                    res =
+                        solve l n
+
+                    isMember a =
                         List.member a l
                 in
-                (List.all isMember) res   
-                |> (&&) (List.length res == Basics.min (List.length l) n)
-                |> Expect.true "Expected set inside other"
+                List.all isMember res
+                    |> (&&) (List.length res == Basics.min (List.length l) n)
+                    |> Expect.true "Expected set inside other"
         ]
