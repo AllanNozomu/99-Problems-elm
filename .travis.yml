@@ -1,6 +1,6 @@
 language: elm
 node_js: '11'
-
+dist: focal
 
 elm:
   - "latest-0.19.1"
