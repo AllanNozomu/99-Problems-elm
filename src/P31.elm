@@ -1,4 +1,23 @@
-module P31 exposing (solve)
+module P31 exposing (isPrime, solve)
+
+
+isPrime : Int -> Bool
+isPrime =
+    solve
+
+
+solveAux : Int -> List Int -> Bool
+solveAux n candidates =
+    case candidates of
+        [] ->
+            True
+
+        candidate :: r ->
+            if Basics.remainderBy candidate n == 0 then
+                False
+
+            else
+                solveAux n r
 
 
 solve : Int -> Bool
@@ -15,7 +34,4 @@ solve n =
                 Basics.remainderBy y x
         in
         List.range 2 (Basics.floor (Basics.sqrt (toFloat n)))
-            |> List.map (myRemainderBy n)
-            |> List.map ((==) 0)
-            |> List.foldl (\curr acc -> acc || curr) False
-            |> Basics.not
+            |> solveAux n

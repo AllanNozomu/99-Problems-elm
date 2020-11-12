@@ -1,16 +1,13 @@
-module P33 exposing (solve)
+module P33 exposing (isCoprime, solve)
+
+import P32
 
 
-gcd : Int -> Int -> Int
-gcd a b =
-    case b of
-        0 ->
-            a
-
-        _ ->
-            gcd b (Basics.remainderBy b a)
+isCoprime : Int -> Int -> Bool
+isCoprime =
+    solve
 
 
 solve : Int -> Int -> Bool
 solve a b =
-    gcd a b == 1
+    P32.gcd a b == 1

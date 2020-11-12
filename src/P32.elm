@@ -1,4 +1,9 @@
-module P32 exposing (solve)
+module P32 exposing (gcd, solve)
+
+
+gcd : Int -> Int -> Int
+gcd =
+    solve
 
 
 solve : Int -> Int -> Int

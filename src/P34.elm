@@ -1,19 +1,11 @@
-module P34 exposing (solve)
+module P34 exposing (solve, totientPhi)
+
+import P33
 
 
-gcd : Int -> Int -> Int
-gcd a b =
-    case b of
-        0 ->
-            a
-
-        _ ->
-            gcd b (Basics.remainderBy b a)
-
-
-coprime : Int -> Int -> Bool
-coprime a b =
-    gcd a b == 1
+totientPhi : Int -> Int
+totientPhi =
+    solve
 
 
 solve : Int -> Int
@@ -23,6 +15,6 @@ solve a =
 
     else
         List.range 1 a
-            |> List.map (coprime a)
+            |> List.map (P33.isCoprime a)
             |> List.filter Basics.identity
             |> List.length
