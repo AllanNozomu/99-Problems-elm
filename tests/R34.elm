@@ -26,4 +26,7 @@ suite =
                     \_ -> Expect.equal (solve input) out
             )
             testCases
+            ++ [ test "Euler's totient function 10090 = 4032" <|
+                    \_ -> Expect.equal (solve 10090) 4032
+               ]
         )
