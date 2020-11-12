@@ -31,7 +31,7 @@ adaptTestCases l =
             , Set.fromList ll
                 |> Set.toList
                 |> List.sort
-                |> List.map (\e -> (e,  List.filter (\ee -> e == ee) ll |> List.length ))
+                |> List.map (\e -> ( e, List.filter (\ee -> e == ee) ll |> List.length ))
             )
         )
         l
