@@ -1,4 +1,9 @@
-module P10 exposing (solve)
+module P10 exposing (encode, solve)
+
+
+encode : List a -> List ( Int, a )
+encode =
+    solve
 
 
 solve : List a -> List ( Int, a )
