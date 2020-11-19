@@ -13,21 +13,7 @@ mirror t1 t2 =
             True
 
         ( Branch _ l1 r1, Branch _ l2 r2 ) ->
-            case ( ( l1, r1 ), ( l2, r2 ) ) of
-                ( ( Branch _ _ _, Branch _ _ _ ), ( Branch _ _ _, Branch _ _ _ ) ) ->
-                    mirror l1 r2 && mirror r1 l2
-
-                ( ( Branch _ _ _, Empty ), ( Empty, Branch _ _ _ ) ) ->
-                    mirror l1 r2
-
-                ( ( Empty, Branch _ _ _ ), ( Branch _ _ _, Empty ) ) ->
-                    mirror r1 l2
-
-                ( ( Empty, Empty ), ( Empty, Empty ) ) ->
-                    True
-
-                _ ->
-                    False
+            mirror l1 r2 && mirror r1 l2
 
         _ ->
             False
