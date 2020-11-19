@@ -86,52 +86,58 @@ insert value heap =
                     arr
 
         newArr =
-            if Array.length heap.arr <= heap.size then
-                Array.push value heap.arr |> insertAux heap.size
+            (if Array.length heap.arr <= heap.size then
+                Array.push value heap.arr
 
-            else
-                Array.set heap.size value heap.arr |> insertAux heap.size
+             else
+                Array.set heap.size value heap.arr
+            )
+                |> insertAux heap.size
     in
     { heap | size = heap.size + 1, arr = newArr }
 
 
 remove : MinHeap a -> MinHeap a
 remove heap =
-    let
-        newSize =
-            heap.size - 1
+    if size == 0 then
+        heap
 
-        removeAux : Int -> Array a -> Array a
-        removeAux n arr =
-            let
-                left =
-                    leftIndex n
+    else
+        let
+            newSize =
+                heap.size - 1
 
-                right =
-                    rightIndex n
-            in
-            case ( left <= (newSize - 1), right <= (newSize - 1) ) of
-                ( True, True ) ->
-                    if heapCompare left right heap.cmpFunction arr && heapCompare left n heap.cmpFunction arr then
-                        removeAux left (arrSwap left n arr)
+            removeAux : Int -> Array a -> Array a
+            removeAux n arr =
+                let
+                    left =
+                        leftIndex n
 
-                    else if heapCompare right n heap.cmpFunction arr then
-                        removeAux right (arrSwap right n arr)
+                    right =
+                        rightIndex n
+                in
+                case ( left <= (newSize - 1), right <= (newSize - 1) ) of
+                    ( True, True ) ->
+                        if heapCompare left right heap.cmpFunction arr && heapCompare left n heap.cmpFunction arr then
+                            removeAux left (arrSwap left n arr)
 
-                    else
+                        else if heapCompare right n heap.cmpFunction arr then
+                            removeAux right (arrSwap right n arr)
+
+                        else
+                            arr
+
+                    ( True, False ) ->
+                        if heapCompare left n heap.cmpFunction arr then
+                            removeAux left (arrSwap left n arr)
+
+                        else
+                            arr
+
+                    _ ->
                         arr
 
-                ( True, False ) ->
-                    if heapCompare left n heap.cmpFunction arr then
-                        removeAux left (arrSwap left n arr)
-
-                    else
-                        arr
-
-                _ ->
-                    arr
-
-        newArr =
-            arrSwap 0 newSize heap.arr |> removeAux 0
-    in
-    { heap | size = newSize, arr = newArr }
+            newArr =
+                arrSwap 0 newSize heap.arr |> removeAux 0
+        in
+        { heap | size = newSize, arr = newArr }
