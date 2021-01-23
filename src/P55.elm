@@ -1,19 +1,17 @@
-module P55 exposing (solve)
-
-import Html exposing (a)
+module P55 exposing (Tree(..), solve)
 
 
-type Tree a
+type Tree comparable
     = Empty
-    | Branch a (Tree a) (Tree a)
+    | Branch comparable (Tree comparable) (Tree comparable)
 
 
-leaf : a -> Tree a
+leaf : comparable -> Tree comparable
 leaf x =
     Branch x Empty Empty
 
 
-decapsulate : List (List (Tree a)) -> List (Tree a)
+decapsulate : List (List (Tree comparable)) -> List (Tree comparable)
 decapsulate =
     List.map
         (\ll ->

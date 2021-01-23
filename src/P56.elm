@@ -1,12 +1,9 @@
 module P56 exposing (solve)
 
-
-type Tree a
-    = Empty
-    | Branch a (Tree a) (Tree a)
+import P55 exposing (Tree(..))
 
 
-mirror : Tree a -> Tree a -> Bool
+mirror : Tree comparable -> Tree comparable -> Bool
 mirror t1 t2 =
     case ( t1, t2 ) of
         ( Empty, Empty ) ->
@@ -19,6 +16,6 @@ mirror t1 t2 =
             False
 
 
-solve : Tree a -> Bool
+solve : Tree comparable -> Bool
 solve t =
     mirror t t
