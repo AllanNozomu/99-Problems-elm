@@ -24,8 +24,8 @@ decapsulate =
         )
 
 
-solve : Int -> List (Tree String)
-solve n =
+solve : Int -> comparable -> List (Tree comparable)
+solve n val =
     case n of
         0 ->
             []
@@ -36,9 +36,9 @@ solve n =
                     lastLevel n 0
 
                 allLastLevels =
-                    generateLastLevel (n - (2 ^ level - 1)) (2 ^ level) []
+                    generateLastLevel val (n - (2 ^ level - 1)) (2 ^ level) []
             in
-            List.map (\ll -> generateLevel 0 n ll) allLastLevels
+            List.map (\ll -> generateLevel val 0 n ll) allLastLevels
                 |> decapsulate
 
 
@@ -51,8 +51,8 @@ lastLevel n level =
         lastLevel (n - (2 ^ level)) (level + 1)
 
 
-generateLastLevel : Int -> Int -> List (Tree String) -> List (List (Tree String))
-generateLastLevel remaining size acc =
+generateLastLevel : comparable -> Int -> Int -> List (Tree comparable) -> List (List (Tree comparable))
+generateLastLevel val remaining size acc =
     if size == 0 then
         if remaining == 0 then
             [ acc ]
@@ -61,14 +61,14 @@ generateLastLevel remaining size acc =
             []
 
     else if remaining == 0 then
-        generateLastLevel 0 (size - 1) (Empty :: acc)
+        generateLastLevel val 0 (size - 1) (Empty :: acc)
 
     else
-        generateLastLevel remaining (size - 1) (Empty :: acc)
-            ++ generateLastLevel (remaining - 1) (size - 1) (leaf "x" :: acc)
+        generateLastLevel val remaining (size - 1) (Empty :: acc)
+            ++ generateLastLevel val (remaining - 1) (size - 1) (leaf val :: acc)
 
 
-mergeLevel : List (Tree String) -> List (Tree String) -> List (Tree String)
+mergeLevel : List (Tree comparable) -> List (Tree comparable) -> List (Tree comparable)
 mergeLevel parents children =
     case ( parents, children ) of
         ( p :: ps, c1 :: c2 :: cs ) ->
@@ -83,15 +83,15 @@ mergeLevel parents children =
             []
 
 
-generateLevel : Int -> Int -> List (Tree String) -> List (Tree String)
-generateLevel level remaining ll =
+generateLevel : comparable -> Int -> Int -> List (Tree comparable) -> List (Tree comparable)
+generateLevel val level remaining ll =
     if 2 ^ level < remaining then
         let
             curr =
-                List.repeat (2 ^ level) (leaf "x")
+                List.repeat (2 ^ level) (leaf val)
 
             children =
-                generateLevel (level + 1) (remaining - 2 ^ level) ll
+                generateLevel val (level + 1) (remaining - 2 ^ level) ll
         in
         mergeLevel curr children
 
