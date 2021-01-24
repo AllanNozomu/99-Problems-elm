@@ -24,8 +24,8 @@ decapsulate =
         )
 
 
-solve : Int -> comparable -> List (Tree comparable)
-solve n val =
+solve : comparable -> Int -> List (Tree comparable)
+solve val n =
     case n of
         0 ->
             []

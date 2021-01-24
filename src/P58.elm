@@ -4,7 +4,7 @@ import P55 exposing (Tree(..))
 import P56
 
 
-solve : Int -> comparable -> List (Tree comparable)
-solve n val =
-    P55.solve n val
+solve : comparable -> Int -> List (Tree comparable)
+solve val n =
+    P55.solve val n
         |> List.filter P56.solve
