@@ -1,4 +1,4 @@
-module P62 exposing (solve)
+module P62 exposing (solve, solveB)
 
 import P55 exposing (Tree(..))
 
@@ -22,3 +22,22 @@ solve tree =
 
                 _ ->
                     x :: solve l ++ solve r
+
+
+solveB : Int -> Tree comparable -> List comparable
+solveB level tree =
+    let
+        solveBAux : Int -> Tree comparable -> List comparable
+        solveBAux curr t =
+            case t of
+                Empty ->
+                    []
+
+                Branch x l r ->
+                    if curr == level then
+                        [ x ]
+
+                    else
+                        solveBAux (curr + 1) l ++ solveBAux (curr + 1) r
+    in
+    solveBAux 1 tree
