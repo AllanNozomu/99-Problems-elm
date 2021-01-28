@@ -1,4 +1,4 @@
-module P55 exposing (Tree(..), solve)
+module P55 exposing (Tree(..), solve, tree0, tree1, tree2, tree3, tree4)
 
 
 type Tree comparable
@@ -9,6 +9,31 @@ type Tree comparable
 leaf : comparable -> Tree comparable
 leaf x =
     Branch x Empty Empty
+
+
+tree0 : Tree Int
+tree0 =
+    Empty
+
+
+tree1 : Tree Int
+tree1 =
+    leaf 1
+
+
+tree2 : Tree Int
+tree2 =
+    Branch 1 (leaf 2) Empty
+
+
+tree3 : Tree Int
+tree3 =
+    Branch 1 (leaf 2) (leaf 3)
+
+
+tree4 : Tree Int
+tree4 =
+    Branch 1 (Branch 2 (leaf 4) Empty) (leaf 3)
 
 
 decapsulate : List (List (Tree comparable)) -> List (Tree comparable)
