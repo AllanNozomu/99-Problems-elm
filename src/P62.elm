@@ -1,31 +1,10 @@
-module P62 exposing (solve, solveB)
+module P62 exposing (solve)
 
 import P55 exposing (Tree(..))
 
 
 solve : Tree comparable -> List comparable
 solve tree =
-    case tree of
-        Empty ->
-            []
-
-        Branch x l r ->
-            case ( l, r ) of
-                ( Empty, Empty ) ->
-                    [ x ]
-
-                ( _, Empty ) ->
-                    solve l
-
-                ( Empty, _ ) ->
-                    solve r
-
-                _ ->
-                    solve l ++ solve r
-
-
-solveB : Tree comparable -> List comparable
-solveB tree =
     case tree of
         Empty ->
             []

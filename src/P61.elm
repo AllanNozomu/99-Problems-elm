@@ -22,3 +22,24 @@ solve tree =
 
                 _ ->
                     solve l + solve r
+
+
+solveB : Tree comparable -> List comparable
+solveB tree =
+    case tree of
+        Empty ->
+            []
+
+        Branch x l r ->
+            case ( l, r ) of
+                ( Empty, Empty ) ->
+                    [ x ]
+
+                ( _, Empty ) ->
+                    solveB l
+
+                ( Empty, _ ) ->
+                    solveB r
+
+                _ ->
+                    solveB l ++ solveB r
