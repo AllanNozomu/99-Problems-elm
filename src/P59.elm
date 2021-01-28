@@ -1,4 +1,4 @@
-module P59 exposing (solve, zipLists)
+module P59 exposing (solve)
 
 import Dict exposing (Dict)
 import P55 exposing (Tree(..))
