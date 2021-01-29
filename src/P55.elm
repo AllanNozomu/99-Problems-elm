@@ -1,12 +1,12 @@
 module P55 exposing (Tree(..), solve, tree0, tree1, tree2, tree3, tree4)
 
 
-type Tree comparable
+type Tree a
     = Empty
-    | Branch comparable (Tree comparable) (Tree comparable)
+    | Branch a (Tree a) (Tree a)
 
 
-leaf : comparable -> Tree comparable
+leaf : a -> Tree a
 leaf x =
     Branch x Empty Empty
 
@@ -36,7 +36,7 @@ tree4 =
     Branch 1 (Branch 2 (leaf 4) Empty) (leaf 3)
 
 
-decapsulate : List (List (Tree comparable)) -> List (Tree comparable)
+decapsulate : List (List (Tree a)) -> List (Tree a)
 decapsulate =
     List.map
         (\ll ->
@@ -49,7 +49,7 @@ decapsulate =
         )
 
 
-solve : comparable -> Int -> List (Tree comparable)
+solve : a -> Int -> List (Tree a)
 solve val n =
     case n of
         0 ->
@@ -76,7 +76,7 @@ lastLevel n level =
         lastLevel (n - (2 ^ level)) (level + 1)
 
 
-generateLastLevel : comparable -> Int -> Int -> List (Tree comparable) -> List (List (Tree comparable))
+generateLastLevel : a -> Int -> Int -> List (Tree a) -> List (List (Tree a))
 generateLastLevel val remaining size acc =
     if size == 0 then
         if remaining == 0 then
@@ -93,7 +93,7 @@ generateLastLevel val remaining size acc =
             ++ generateLastLevel val (remaining - 1) (size - 1) (leaf val :: acc)
 
 
-mergeLevel : List (Tree comparable) -> List (Tree comparable) -> List (Tree comparable)
+mergeLevel : List (Tree a) -> List (Tree a) -> List (Tree a)
 mergeLevel parents children =
     case ( parents, children ) of
         ( p :: ps, c1 :: c2 :: cs ) ->
@@ -108,7 +108,7 @@ mergeLevel parents children =
             []
 
 
-generateLevel : comparable -> Int -> Int -> List (Tree comparable) -> List (Tree comparable)
+generateLevel : a -> Int -> Int -> List (Tree a) -> List (Tree a)
 generateLevel val level remaining ll =
     if 2 ^ level < remaining then
         let
