@@ -1,4 +1,4 @@
-module P64 exposing (solve, tree64)
+module P64 exposing (TreeNodePosition(..), solve, tree64)
 
 import P55 exposing (Tree(..))
 import P57
@@ -15,33 +15,16 @@ tree64 =
 
 solve : Tree a -> Tree (TreeNodePosition a)
 solve tree =
-    solveInOrder 0 tree |> Tuple.second |> solveLevel 1
+    solveLevel 1 tree |> solveInOrder 1 |> Tuple.second
 
 
-solveInOrder : Int -> Tree a -> ( Int, Tree (TreeNodePosition a) )
-solveInOrder n tree =
-    case tree of
-        Empty ->
-            ( n, Empty )
-
-        Branch x l r ->
-            let
-                ( nl, ll ) =
-                    solveInOrder n l
-
-                ( nr, rr ) =
-                    solveInOrder (nl + 1) r
-            in
-            ( nr, Branch (NodePosition x (nl + 1) 0) ll rr )
-
-
-solveLevel : Int -> Tree (TreeNodePosition a) -> Tree (TreeNodePosition a)
+solveLevel : Int -> Tree a -> Tree (TreeNodePosition a)
 solveLevel level tree =
     case tree of
         Empty ->
             Empty
 
-        Branch (NodePosition x a _) l r ->
+        Branch x l r ->
             let
                 ll =
                     solveLevel (level + 1) l
@@ -49,4 +32,21 @@ solveLevel level tree =
                 rr =
                     solveLevel (level + 1) r
             in
-            Branch (NodePosition x a level) ll rr
+            Branch (NodePosition x 0 level) ll rr
+
+
+solveInOrder : Int -> Tree (TreeNodePosition a) -> ( Int, Tree (TreeNodePosition a) )
+solveInOrder n tree =
+    case tree of
+        Empty ->
+            ( n, Empty )
+
+        Branch (NodePosition x _ lv) l r ->
+            let
+                ( nl, ll ) =
+                    solveInOrder n l
+
+                ( nr, rr ) =
+                    solveInOrder (nl + 1) r
+            in
+            ( nr, Branch (NodePosition x nl lv) ll rr )
