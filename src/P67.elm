@@ -57,25 +57,49 @@ separateLeftRight s =
     ( left, List.take (List.length s - 1) s |> List.drop (List.length left + 1) )
 
 
-solveB : String -> Tree Char
+finishesWithClosing : List Char -> Bool
+finishesWithClosing s =
+    case List.reverse s of
+        ')' :: _ ->
+            True
+
+        _ ->
+            False
+
+
+solveB : String -> Maybe (Tree Char)
 solveB s =
     let
-        solveBAux ls =
+        solveBAux res ls =
             case ls of
                 [] ->
-                    Empty
+                    ( res && True, Empty )
 
                 [ a ] ->
-                    Branch a Empty Empty
+                    ( res && True, Branch a Empty Empty )
 
                 a :: '(' :: ss ->
                     let
                         ( l, r ) =
                             separateLeftRight ss
+
+                        ( resl, ll ) =
+                            solveBAux res l
+
+                        ( resr, rr ) =
+                            solveBAux res r
+
+                        fres =
+                            resl && resr && finishesWithClosing ss
                     in
-                    Branch a (solveBAux l) (solveBAux r)
+                    ( fres, Branch a ll rr )
 
                 _ ->
-                    Empty
+                    ( False, Empty )
     in
-    String.toList s |> solveBAux
+    case String.toList s |> solveBAux True of
+        ( True, res ) ->
+            Just res
+
+        ( False, _ ) ->
+            Nothing
