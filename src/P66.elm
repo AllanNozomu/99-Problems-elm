@@ -1,6 +1,5 @@
 module P66 exposing (solve, tree66)
 
-import Html exposing (i)
 import P55 exposing (Tree(..))
 import P57
 import P64 exposing (TreeNodePosition(..))
