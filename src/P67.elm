@@ -72,9 +72,6 @@ solveB s =
                     let
                         ( l, r ) =
                             separateLeftRight ss
-
-                        _ =
-                            Debug.log "lr" ( l, r )
                     in
                     Branch a (solveBAux l) (solveBAux r)
 
